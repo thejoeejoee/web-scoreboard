@@ -8,13 +8,17 @@ export default new Vuex.Store({
     state: {
         score: [0, 0],
         time: 0,
+        timeIsRunning: false,
     },
     actions: {
 
     },
     mutations: {
         setTime(state, value) {
-            state.time = value;
+            state.time = Math.max(value, 0);
+        },
+        setTimeIsRunning(state, value) {
+            state.timeIsRunning = value;
         },
 
         setScore(state, {i, val}) {

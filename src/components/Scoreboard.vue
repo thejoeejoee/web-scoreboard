@@ -32,10 +32,11 @@ export default {
     return {
       timeStart: new Date(),
       timerID: null,
+      lastTimeTick: 0,
     }
   },
   computed: {
-    ...mapState(['time', 'score']),
+    ...mapState(['time', 'score', 'timeIsRunning']),
 
     timeFormatted() {
       return `${("0" + ((this.time / 60) | 0)).slice(-2)}:${("0" + (this.time % 60)).slice(-2)}`;
@@ -44,12 +45,16 @@ export default {
   created() {
     this.timerID = setInterval(() => {
 
-      this.$store.commit(
-          'setTime',
-          ((new Date() - this.timeStart) / 1000) | 0
-      );
+      if (Math.abs(this.lastTimeTick - new Date()) > 1000 && this.timeIsRunning) {
+        this.$store.commit(
+            'setTime',
+            this.time + 1
+        );
 
-    }, 500);
+        this.lastTimeTick = new Date();
+      }
+
+    }, 200);
   },
   beforeDestroy() {
     clearInterval(this.timerID);
@@ -65,10 +70,11 @@ $blue--dark: #1c1e54ff;
   flex-direction: row;
   position: relative;
   align-items: flex-start;
-  width: 400px;
+
+  margin: 2em 0 0 2em;
 
   &__logo {
-    max-width: 120px;
+    max-width: 6em;
     z-index: 10;
 
     img {
@@ -88,14 +94,14 @@ $blue--dark: #1c1e54ff;
       left: 100%;
       height: 100%;
       top: 0;
-      width: 20px;
+      width: 1em;
       clip-path: polygon(0 0, 0 0, 100% 100%, 0 100%);
     }
 
     &--first {
       background-color: white;
       color: $blue--dark;
-      padding: 6px;
+      padding: .4em;
       position: relative;
 
       &.Scoreboard__line--fill-left:before {
@@ -110,7 +116,7 @@ $blue--dark: #1c1e54ff;
     &--second {
       background-color: $blue--dark;
       color: white;
-      height: 30.5px;
+      height: 2em;
       padding: 0 6px;
       width: 60%;
 
@@ -130,36 +136,37 @@ $blue--dark: #1c1e54ff;
       height: 100%;
       right: 100%;
       top: 0;
-      width: 50px;
+      width: 3.75em;
       position: absolute;
     }
   }
 
   &__team {
-    font-size: 24px;
-    padding: 0 4px;
-    font-weight: 600;
+    font-size: 1.5em;
+    padding: 0 0.4em;
+    font-weight: 500;
   }
 
   &__score {
-    font-size: 24px;
+    font-size: 1.3em;
     font-weight: bold;
     width: 5.5ch;
     text-align: center;
   }
 
   &__time {
-    font-size: 24px;
+    font-size: 1.2em;
     color: white;
-    padding-left: 4px;
+    padding-left: 0.6em;
     display: inline-block;
     background-color: $blue--dark;
   }
 
   &__match-part {
-    font-size: 20px;
+    font-size: 1.1em;
     color: white;
-    padding: 0 4px;
+    padding: 0 0.4em;
+    letter-spacing: 0.1em;
     display: inline-block;
     background-color: $blue--dark;
   }
