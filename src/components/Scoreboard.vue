@@ -1,66 +1,58 @@
 <template>
-  <div>
-    <div class="GreenScreen">
-
-      <div class="Scoreboard">
-
-        <div class="Scoreboard__logo">
-          <img src="../assets/fish.png" alt="">
-        </div>
-
-        <div class="Scoreboard__data">
-
-          <div class="Scoreboard__line Scoreboard__line--first Scoreboard__line--fill-left">
-            <div class="Scoreboard__team">LIT</div>
-            <div class="Scoreboard__score">
-              {{ score[0] }} - {{ score[1] }}
-            </div>
-
-            <div class="Scoreboard__team">DUK</div>
-          </div>
-
-          <div class="Scoreboard__line Scoreboard__line--second Scoreboard__line--fill-left">
-            <div class="Scoreboard__time">{{ timeFormatted }}</div>
-            <div class="Scoreboard__match-part">1/2</div>
-          </div>
-
-        </div>
-      </div>
-
-
+  <div class="Scoreboard">
+    <div class="Scoreboard__logo">
+      <img src="../assets/fish.png" alt="">
     </div>
 
-    <div>
-      <button @click="updateScore(0, score[0] + 1)">home +1</button>
-      <button @click="updateScore(1, score[1] + 1)">away +1</button>
+    <div class="Scoreboard__data">
+
+      <div class="Scoreboard__line Scoreboard__line--first Scoreboard__line--fill-left">
+        <div class="Scoreboard__team">LIT</div>
+        <div class="Scoreboard__score">
+          {{ score[0] }} - {{ score[1] }}
+        </div>
+        <div class="Scoreboard__team">DUK</div>
+      </div>
+
+      <div class="Scoreboard__line Scoreboard__line--second Scoreboard__line--fill-left">
+        <div class="Scoreboard__time">{{ timeFormatted }}</div>
+        <div class="Scoreboard__match-part">1/2</div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
+import {mapState} from "vuex";
+
 export default {
   name: 'Scoreboard',
   data() {
     return {
-      score: [0, 0],
-      time: 0,
       timeStart: new Date(),
-    }
-  },
-  methods: {
-    updateScore(i, val) {
-      this.$set(this.score, i, val);
+      timerID: null,
     }
   },
   computed: {
+    ...mapState(['time', 'score']),
+
     timeFormatted() {
       return `${("0" + ((this.time / 60) | 0)).slice(-2)}:${("0" + (this.time % 60)).slice(-2)}`;
     }
   },
   created() {
-    setInterval(() => {
-      this.time = ((new Date() - this.timeStart) / 1000) | 0;
+    this.timerID = setInterval(() => {
+
+      this.$store.commit(
+          'setTime',
+          ((new Date() - this.timeStart) / 1000) | 0
+      );
+
     }, 500);
+  },
+  beforeDestroy() {
+    clearInterval(this.timerID);
   }
 }
 </script>
@@ -68,22 +60,15 @@ export default {
 <style scoped lang="scss">
 $blue--dark: #1c1e54ff;
 
-.GreenScreen {
-  background: rgb(173, 255, 47);
-  padding: 40px;
-  margin: 40px;
-  min-height: 400px;
-}
-
 .Scoreboard {
   display: flex;
   flex-direction: row;
   position: relative;
-  align-items: start;
+  align-items: flex-start;
   width: 400px;
 
   &__logo {
-    max-width: 78px;
+    max-width: 120px;
     z-index: 10;
 
     img {
@@ -116,6 +101,7 @@ $blue--dark: #1c1e54ff;
       &.Scoreboard__line--fill-left:before {
         background-color: white;
       }
+
       &:after {
         background-color: white;
       }
@@ -132,6 +118,7 @@ $blue--dark: #1c1e54ff;
         background-color: $blue--dark;
         clip-path: polygon(0 0, 100% 0, 100% 100%, 55% 100%);
       }
+
       &:after {
         background-color: $blue--dark;
         width: 15px;
@@ -158,6 +145,7 @@ $blue--dark: #1c1e54ff;
     font-size: 24px;
     font-weight: bold;
     width: 5.5ch;
+    text-align: center;
   }
 
   &__time {

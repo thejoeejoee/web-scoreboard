@@ -1,16 +1,19 @@
 <template>
   <div id="app">
-    <Scoreboard />
+    <GreenScreen/>
+    <Controls></Controls>
   </div>
 </template>
 
 <script>
-import Scoreboard from './components/Scoreboard'
+import GreenScreen from "@/components/Greenscreen";
+import Controls from "@/components/Controls";
 
 export default {
   name: 'app',
   components: {
-    Scoreboard
+    Controls,
+    GreenScreen,
   }
 }
 </script>
@@ -20,8 +23,9 @@ export default {
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+body, html {
+  overflow: hidden;
 }
 </style>
