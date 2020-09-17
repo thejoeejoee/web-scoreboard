@@ -18,7 +18,7 @@ export default {
   width: 1920px;
   height: 1080px;
   background-color: greenyellow;
-  border: 4px solid deeppink;
+  border: 6px solid deeppink;
   box-sizing: content-box;
 }
 </style>

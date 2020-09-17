@@ -18,10 +18,12 @@
       <div>
         <button class="Controls__btn Controls__btn--big" v-if="!timeIsRunning"
                 @click="setTimeIsRunning(true)"
-        >START</button>
+        >START
+        </button>
         <button class="Controls__btn Controls__btn--big" v-if="timeIsRunning"
                 @click="setTimeIsRunning(false)"
-        >STOP</button>
+        >STOP
+        </button>
         <hr>
 
         <button class="Controls__btn" @click="setTime(time - 15)">-15</button>
@@ -30,11 +32,39 @@
         <button class="Controls__btn" @click="setTime(time + 15)">+15</button>
       </div>
     </div>
+    <div class="Controls__tab">
+      <h5>State</h5>
+      <div>
+        <template v-for="s_ in modes">
+          <button
+              @click="setMode(s_)"
+              :key="s_" :disabled="s_ === mode"
+              class="Controls__btn Controls__btn--mid"
+          >{{ s_ }}
+          </button>
+          <br>
+        </template>
+
+      </div>
+    </div>
+    <div class="Controls__tab">
+      <h5>Match</h5>
+
+      <div>
+        <label>
+          <input type="text" disabled v-model="matchUrl">
+        </label>
+        <hr>
+        <button class="Controls__btn Controls__btn--big" @click="askForMatchUrl"
+        >SET
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import {mapMutations, mapState} from "vuex";
+import {mapMutations, mapState, mapActions} from "vuex";
 
 export default {
   name: "Controls",
@@ -42,13 +72,21 @@ export default {
     return {
       localScore: [0, 0],
       innerTime: 0,
+      modes: [
+        'cover',
+        'overview',
+        'homeRoster',
+        'guestRoster',
+        'scoreboard',
+      ],
     }
   },
   methods: {
-    ...mapMutations(['setScore', 'setTimeIsRunning', 'setTime'])
+    ...mapMutations(['setScore', 'setTimeIsRunning', 'setTime', 'setMode']),
+    ...mapActions(['askForMatchUrl']),
   },
   computed: {
-    ...mapState(['score', 'timeIsRunning', 'time']),
+    ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode']),
     localTime: {
       set(val) {
         this.innerTime = val;
@@ -81,6 +119,10 @@ export default {
 
     &--big {
       font-size: 2em;
+    }
+
+    &--mid {
+      font-size: 1.5em;
     }
   }
 }
