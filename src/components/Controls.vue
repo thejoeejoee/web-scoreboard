@@ -39,10 +39,9 @@
           <button
               @click="setMode(s_)"
               :key="s_" :disabled="s_ === mode"
-              class="Controls__btn Controls__btn--mid"
+              class="Controls__btn Controls__btn--mid Controls__btn--block"
           >{{ s_ }}
           </button>
-          <br>
         </template>
 
       </div>
@@ -116,6 +115,11 @@ export default {
 
   &__btn {
     margin-right: .5em;
+
+    &--block {
+      display: block;
+      margin-bottom: .3em;
+    }
 
     &--big {
       font-size: 2em;
