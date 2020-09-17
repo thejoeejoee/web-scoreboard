@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import createPersistedState from "vuex-persistedstate";
+import Axios from "axios";
 
 Vue.use(Vuex);
 
@@ -12,13 +13,22 @@ export default new Vuex.Store({
         timeIsRunning: false,
 
         matchUrl: null,
+        matchData: {},
     },
     actions: {
-        askForMatchUrl({commit}) {
+        askForMatchUrl({state, commit}) {
             let url;
             // eslint-disable-next-line no-cond-assign
-            if (url = prompt("Match url: ")) {
+            if (url = prompt("Match url: ", state.matchUrl)) {
                 commit('setMatchUrl', url)
+
+                // TODO: need to pass it through CORS ignoring proxy
+                return Axios.get(url).then((response) => {
+                    if (response.status === 200) {
+                        console.log(response.data);
+                        commit('setMatchData', response.data.data)
+                    }
+                })
             }
         }
     },
@@ -36,6 +46,10 @@ export default new Vuex.Store({
 
         setMatchUrl(state, url) {
             state.matchUrl = url
+        },
+        setMatchData(state, matchData) {
+            state.matchData = matchData
+            state.score = [matchData.homeTeamScore || 0, matchData.guestTeamScore || 0]
         },
         setMode(state, mode) {
             state.mode = mode
