@@ -57,6 +57,8 @@
         <button class="Controls__btn Controls__btn--big" @click="askForMatchUrl"
         >SET
         </button>
+        <hr>
+        {{ matchData.homeTeamName }} vs. {{ matchData.guestTeamName }}
       </div>
     </div>
   </div>
@@ -77,6 +79,7 @@ export default {
         'homeRoster',
         'guestRoster',
         'scoreboard',
+          'EMPTY'
       ],
     }
   },
@@ -85,7 +88,7 @@ export default {
     ...mapActions(['askForMatchUrl']),
   },
   computed: {
-    ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode']),
+    ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode', 'matchData']),
     localTime: {
       set(val) {
         this.innerTime = val;

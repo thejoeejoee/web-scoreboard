@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$blue--dark: #1c1e54ff;
+@import "src/styles/variables";
 
 .Scoreboard {
   display: flex;
