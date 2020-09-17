@@ -22,8 +22,7 @@ export default new Vuex.Store({
             if (url = prompt("Match url: ", state.matchUrl)) {
                 commit('setMatchUrl', url)
 
-                // TODO: need to pass it through CORS ignoring proxy
-                return Axios.get(url).then((response) => {
+                return Axios.post('/api/data-proxy', {url: url}).then((response) => {
                     if (response.status === 200) {
                         console.log(response.data);
                         commit('setMatchData', response.data.data)
