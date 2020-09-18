@@ -26,13 +26,13 @@ export default {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(270deg, $blue--dark, $blue--middle);
+  background: linear-gradient(135deg, $blue--dark, $blue--middle);
   background-size: 400% 400%;
-
   animation: ColorFade 20s ease infinite;
+  color: white;
 
   &__logo {
-    max-width: 40em;
+    max-width: 60em;
     margin-bottom: 4em;
 
     img {
@@ -41,7 +41,6 @@ export default {
   }
 
   &__title {
-    color: white;
     text-transform: uppercase;
     font-weight: 600;
     font-size: 2.8em;

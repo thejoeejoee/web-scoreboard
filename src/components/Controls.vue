@@ -27,8 +27,8 @@
         <hr>
 
         <button class="Controls__btn" @click="setTime(time - 15)">-15</button>
-        <button class="Controls__btn" @click="setTime(time + 15)">+15</button>
-        <button class="Controls__btn" @click="setTime(time - 15)">-15</button>
+        <button class="Controls__btn" @click="setTime(time - 1)">-1</button>
+        <button class="Controls__btn" @click="setTime(time + 1)">+1</button>
         <button class="Controls__btn" @click="setTime(time + 15)">+15</button>
       </div>
     </div>
