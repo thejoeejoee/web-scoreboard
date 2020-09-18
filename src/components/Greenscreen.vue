@@ -13,6 +13,8 @@
           :name="matchData.guestTeamName" :players="matchData.guestTeamPlayers"
           :leader-name="matchData.guestTeamLeaderName" :coach-name="matchData.guestTeamCoachName"
       ></Roster>
+
+      <Cover v-if="mode === 'cover'"></Cover>
     </transition>
   </div>
 </template>
@@ -21,10 +23,11 @@
 import Scoreboard from "@/components/Scoreboard";
 import {mapState} from "vuex";
 import Roster from "@/components/Roster";
+import Cover from "@/components/Cover";
 
 export default {
   name: "GreenScreen",
-  components: {Roster, Scoreboard},
+  components: {Cover, Roster, Scoreboard},
   computed: {
     ...mapState(['mode', 'matchData']),
   }
@@ -38,6 +41,7 @@ export default {
   background-color: greenyellow;
   border: 6px solid deeppink;
   box-sizing: content-box;
+  position: relative;
 }
 
 .fade-enter-active, .fade-leave-active {
