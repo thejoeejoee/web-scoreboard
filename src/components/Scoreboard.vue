@@ -44,7 +44,6 @@ export default {
   },
   created() {
     this.timerID = setInterval(() => {
-
       if (Math.abs(this.lastTimeTick - new Date()) > 1000 && this.timeIsRunning) {
         this.$store.commit(
             'setTime',
@@ -53,7 +52,6 @@ export default {
 
         this.lastTimeTick = new Date();
       }
-
     }, 200);
   },
   beforeDestroy() {
@@ -71,7 +69,7 @@ export default {
   position: relative;
   align-items: flex-start;
 
-  margin: 2em 0 0 2em;
+  margin: 2rem 0 0 2rem;
 
   &__logo {
     max-width: 6em;
@@ -94,14 +92,14 @@ export default {
       left: 100%;
       height: 100%;
       top: 0;
-      width: 1em;
+      width: 1rem;
       clip-path: polygon(0 0, 0 0, 100% 100%, 0 100%);
     }
 
     &--first {
       background-color: white;
       color: $blue--dark;
-      padding: .4em;
+      padding: .4rem;
       position: relative;
 
       &.Scoreboard__line--fill-left:before {
@@ -116,8 +114,8 @@ export default {
     &--second {
       background-color: $blue--dark;
       color: white;
-      height: 2em;
-      padding: 0 6px;
+      height: 2rem;
+      padding: 0 .5rem;
       width: 60%;
 
       &.Scoreboard__line--fill-left:before {
@@ -127,7 +125,7 @@ export default {
 
       &:after {
         background-color: $blue--dark;
-        width: 15px;
+        width: 1rem;
       }
     }
 
@@ -136,37 +134,37 @@ export default {
       height: 100%;
       right: 100%;
       top: 0;
-      width: 3.75em;
+      width: 3.75rem;
       position: absolute;
     }
   }
 
   &__team {
     font-size: 1.5em;
-    padding: 0 0.4em;
+    padding: 0 0.6rem;
     font-weight: 500;
   }
 
   &__score {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: bold;
-    width: 5.5ch;
+    width: 5rem;
     text-align: center;
   }
 
   &__time {
-    font-size: 1.2em;
+    font-size: 1.2rem;
     color: white;
-    padding-left: 0.6em;
+    padding-left: 0.6rem;
     display: inline-block;
     background-color: $blue--dark;
   }
 
   &__match-part {
-    font-size: 1.1em;
+    font-size: 1.1rem;
     color: white;
-    padding: 0 0.4em;
-    letter-spacing: 0.1em;
+    padding: 0 0.4rem;
+    letter-spacing: 0.1rem;
     display: inline-block;
     background-color: $blue--dark;
   }

@@ -1,26 +1,36 @@
 <template>
-  <div class="Roster">
-    <div class="Roster__headline">{{ name }}</div>
-    <div class="Roster__content">
-      <div class="Roster__player" v-for="p in sortedPlayers" :key="p.id">
+  <div class="Roster__container">
+    <div class="Roster">
+      <div class="Roster__title">{{ name }}</div>
+      <div class="Roster__content">
+        <div class="Roster__player" v-for="p in sortedPlayers" :key="p.id">
         <span class="Roster__number">
           {{ p.number }}
         </span>
-        {{ p.personName }}
+          {{ p.personName }}
 
-        <span class="Roster__player-info" v-if="shouldDisplayStats">
-          {{ p.goals }}/{{ p.goalsSeven }}
+          <span class="Roster__player-stats" v-if="shouldDisplayStats">
+          <template v-if="p.yellowCards">🟨 </template>
+          <template v-for="_ in p.redCards + p.redCardsPlus">🟥 </template>
+          <template v-for="_ in p.blueCards">🟦 </template>
+          <template v-for="_ in p.twoMinutesCount">2" </template>
+
+          <span class="Roster__player-stats--goals">
+            {{ p.goals }}/{{ p.goalsSeven }}
+          </span>
+
         </span>
-      </div>
-      <!-- TODO: tune styling -->
+        </div>
+        <!-- TODO: tune styling -->
 
-      <div v-if="coachName" class="Roster__player">
-        <span class="Roster__number">OV</span>
-        {{ coachName }}
-      </div>
-      <div v-if="leaderName" class="Roster__player">
-        <span class="Roster__number">T</span>
-        {{ leaderName }}
+        <div v-if="coachName" class="Roster__player">
+          <span class="Roster__number">OV</span>
+          {{ coachName }}
+        </div>
+        <div v-if="leaderName" class="Roster__player">
+          <span class="Roster__number">T</span>
+          {{ leaderName }}
+        </div>
       </div>
     </div>
   </div>
@@ -70,14 +80,25 @@ blueCards	0
 
 .Roster {
   width: 60rem;
-  margin: 10rem auto;
 
-  &__headline {
+  &__container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10rem;
+  }
+
+
+  &__title {
     background-color: $blue--dark;
     color: white;
     font-size: 2rem;
     font-weight: 600;
-    padding: 1rem .5rem;
+    padding: 1.5rem .5rem;
     position: relative;
 
     &:after, &:before {
@@ -85,7 +106,7 @@ blueCards	0
       content: "";
       top: 0;
       height: 100%;
-      width: 4rem;
+      width: 5rem;
       background-color: $blue--dark;
     }
 
@@ -116,10 +137,16 @@ blueCards	0
     align-items: center;
   }
 
-  &__player-info {
+  &__player-stats {
     margin-left: auto;
     margin-right: 1rem;
     font-size: 1.3rem;
+
+    &--goals {
+      display: inline-block;
+      text-align: right;
+      width: 2.5rem;
+    }
   }
 
   &__number {

@@ -3,7 +3,8 @@
     <div class="Cover__logo">
       <img src="../assets/logo.png" alt="">
     </div>
-    <h1 class="Cover__title">Vysílání v přípravě</h1>
+    <div class="Cover__loader"></div>
+    <div class="Cover__copyright">TJ Tatran Litovel © {{ (new Date()).getFullYear() }}</div>
   </div>
 </template>
 
@@ -32,29 +33,61 @@ export default {
   color: white;
 
   &__logo {
-    max-width: 60em;
-    margin-bottom: 4em;
+    max-width: 60rem;
+    margin: 6rem 0;
 
     img {
       max-width: 100%;
     }
   }
 
-  &__title {
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 2.8em;
+  &__copyright {
+    font-size: 1.5rem;
+  }
+
+  &__loader {
+    &, &:before, &:after {
+      border-radius: 50%;
+      width: 2.5rem;
+      height: 2.5rem;
+      animation-fill-mode: both;
+      animation: load7 1.8s infinite ease-in-out;
+    }
+
+    color: #ffffff;
+    font-size: 1rem;
+    margin: 6rem 0;
     position: relative;
-    letter-spacing: .04em;
+    text-indent: -9999em;
+    transform: translateZ(0);
+    animation-delay: -0.16s;
+
+    &:before,
     &:after {
-      overflow: hidden;
-      display: inline-block;
-      vertical-align: bottom;
+      content: '';
       position: absolute;
-      left: 100%;
-      animation: Ellipsis steps(6, end) 2s infinite;
-      content: "\2026"; /* ascii code for the ellipsis character */
-      width: 0;
+      top: 0;
+    }
+
+    &:before {
+      left: -3.5em;
+      animation-delay: -0.32s;
+    }
+
+    &:after {
+      left: 3.5em;
+      animation-delay: 0.16s;
+    }
+
+    @keyframes load7 {
+      0%,
+      80%,
+      100% {
+        box-shadow: 0 2.5em 0 -1.3em;
+      }
+      40% {
+        box-shadow: 0 2.5em 0 0;
+      }
     }
   }
 }

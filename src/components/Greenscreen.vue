@@ -1,6 +1,7 @@
 <template>
   <div class="GreenScreen">
-    <transition name="fade" mode="out-in">
+    <transition name="fade">
+
       <Scoreboard
           v-if="mode === 'scoreboard'"
           key="scoreboard"
@@ -63,7 +64,7 @@ export default {
 }
 
 .fade-enter-active, .fade-leave-active {
-  transition: opacity .4s;
+  transition: opacity .8s;
 }
 
 .fade-enter, .fade-leave-to {

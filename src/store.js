@@ -21,7 +21,7 @@ export default new Vuex.Store({
 
         // match
         matchUrl: null,
-        matchData: {},
+        matchData: {events: []},
         baseApiUrl: 'https://is.handball.cz',
 
         // timer ID for fetching data
