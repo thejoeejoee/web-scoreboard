@@ -3,16 +3,22 @@
     <div class="Controls__tab">
       <h5>Score & events</h5>
 
-      <button @click="setScore({i: 0, val: score[0] + 1})" class="Controls__btn Controls__btn--big">home + 1</button>
-      <button @click="setScore({i: 1, val: score[1] + 1})" class="Controls__btn Controls__btn--big">away + 1</button>
+      TIMER: {{ !!dataTimerId ? 'YES' : 'NO' }} <br>
 
-      <div>
-        <label><input type="number" v-model="localScore[0]"></label>
-        <label><input type="number" v-model="localScore[1]"></label>
-        <button class="Controls__btn Controls__btn--big">SET</button>
-      </div>
+      <button @click="startDataTimer" v-if="!dataTimerId">START DATA TIMER</button>
+      <button @click="stopDataTimer" v-if="dataTimerId">STOP DATA TIMER</button>
+      <br>
+      <!--
+            <button @click="setScore({i: 0, val: score[0] + 1})" class="Controls__btn Controls__btn&#45;&#45;big">home + 1</button>
+            <button @click="setScore({i: 1, val: score[1] + 1})" class="Controls__btn Controls__btn&#45;&#45;big">away + 1</button>
 
-      <hr>
+            <div>
+              <label><input type="number" v-model="localScore[0]"></label>
+              <label><input type="number" v-model="localScore[1]"></label>
+              <button class="Controls__btn Controls__btn&#45;&#45;big">SET</button>
+            </div>
+
+            <hr>-->
 
       <label>
         <input type="checkbox" v-model="showEvents" :disabled="mode !== 'scoreboard'">
@@ -64,6 +70,9 @@
         <button class="Controls__btn Controls__btn--big" @click="askForMatchUrl"
         >SET
         </button>
+        <button class="Controls__btn Controls__btn--big" @click="loadMatchData"
+        >LOAD
+        </button>
         <hr>
       </div>
     </div>
@@ -92,11 +101,11 @@ export default {
   },
   methods: {
     ...mapMutations(['setScore', 'setTimeIsRunning', 'setTime', 'setMode']),
-    ...mapActions(['askForMatchUrl']),
+    ...mapActions(['askForMatchUrl', 'startDataTimer', 'stopDataTimer', 'loadMatchData']),
   },
   computed: {
     ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode', 'matchData']),
-    ...mapFields(['showEvents']),
+    ...mapFields(['showEvents', 'dataTimerId']),
     localTime: {
       set(val) {
         this.innerTime = val;
@@ -110,6 +119,9 @@ export default {
     score(new_) {
       this.localScore = new_;
     }
+  },
+  created() {
+    this.stopDataTimer();
   }
 }
 </script>

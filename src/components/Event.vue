@@ -2,9 +2,16 @@
   <div class="Event__container">
 
     <div class="Event">
-      <div class="Event__number">{{ event.playerNumber }}</div>
-      <div class="Event__title">{{ event.playerName }}</div>
-      <div class="Event__time">{{ event.matchTime }}</div>
+      <div class="Event__number">
+        <span class="Event__number--hash">#</span>{{ event.playerNumber }}
+      </div>
+      <div class="Event__title">
+        {{ event.playerName }}
+        <span class="Event__title--info" v-if="eventInfo">
+          {{ eventInfo }}
+        </span>
+      </div>
+      <div class="Event__time">{{ event.matchTime.replace(/^00:/, '') }}</div>
 
     </div>
 
@@ -13,6 +20,7 @@
 
 <script>
 import {mapGetters} from "vuex";
+import {MATCH_EVENT_TYPE} from "@/const.ts";
 
 export default {
   name: "Event",
@@ -20,6 +28,19 @@ export default {
     ...mapGetters({
       'event': 'lastEvent'
     }),
+    eventInfo() {
+      return {
+        [MATCH_EVENT_TYPE.GOAL]: `${this.event.homeTeamScore} - ${this.event.guestTeamScore}`,
+        [MATCH_EVENT_TYPE.GOAL_FROM_PENALTY]: `${this.event.homeTeamScore} - ${this.event.guestTeamScore}`,
+        [MATCH_EVENT_TYPE.FAILED_PENALTY]: `🚫 7m hod`,
+        [MATCH_EVENT_TYPE.PENALTY_2_MINUTES]: `⏰ 2 minuty`,
+        [MATCH_EVENT_TYPE.YELLOW_CARD]: `🟨 žlutá karta`,
+        [MATCH_EVENT_TYPE.RED_CARD]: `🟥 červená karta`,
+        [MATCH_EVENT_TYPE.RED_CARD_PLUS]: `🟥 červená karta+`,
+        [MATCH_EVENT_TYPE.BLUE_CARD]: `🟦️ modrá karta`,
+        [MATCH_EVENT_TYPE.TEAM_TIME_OUT]: `⏲️ team time-out`,
+      }[this.event.competitionMatchEventTypeId]
+    }
   }
 }
 /*
@@ -38,6 +59,7 @@ homeTeamScore	22
 
 <style scoped lang="scss">
 @import "src/styles/variables";
+
 .Event {
   display: flex;
   flex-direction: row;
@@ -49,13 +71,17 @@ homeTeamScore	22
     background-color: white;
     color: $blue--dark;
     height: 6rem;
-    width: 10rem;
+    width: 12rem;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     right: -1em;
     clip-path: polygon(0 0, calc(100% - 3rem) 0, 100% 100%, 3rem 100%);
+
+    &--hash {
+      font-size: 1.6rem;
+    }
   }
 
   &__title {
@@ -67,14 +93,19 @@ homeTeamScore	22
     font-weight: 500;
     display: flex;
     align-items: center;
-    padding: 0 3rem;
+    padding: 0 6rem 0 3rem;
+    justify-content: space-between;
+
+    &--info {
+      font-size: 1.8rem;
+    }
   }
 
   &__time {
     font-size: 2rem;
     font-weight: 600;
     height: 6rem;
-    width: 16rem;
+    width: 12rem;
     color: $blue--dark;
     background-color: white;
     display: flex;

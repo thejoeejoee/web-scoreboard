@@ -56,7 +56,7 @@ export default {
 .GreenScreen {
   width: 1920px;
   height: 1080px;
-  background-color: greenyellow;
+  background-color: #adff2f;
   border: 6px solid deeppink;
   box-sizing: content-box;
   position: relative;
