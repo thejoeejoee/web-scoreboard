@@ -15,6 +15,8 @@
       </div>
 
       <div class="Overview__subtitle">
+        {{ matchData.competitionName }}
+        <br>
         <!-- TODO: fix TZ -->
         {{ new Date(matchData.matchStart).toLocaleString() }}
         –
@@ -47,7 +49,7 @@ export default {
   left: 0;
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
   padding-bottom: 4em;
 
   &__content {
@@ -111,7 +113,7 @@ export default {
     justify-content: center;
     align-items: center;
     font-size: 3em;
-    padding: .5em 1em;
+    padding: .5em 1.2em;
     box-sizing: border-box;
     position: relative;
 

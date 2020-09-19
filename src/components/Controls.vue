@@ -1,7 +1,7 @@
 <template>
   <div class="Controls">
     <div class="Controls__tab">
-      <h5>Score</h5>
+      <h5>Score & events</h5>
 
       <button @click="setScore({i: 0, val: score[0] + 1})" class="Controls__btn Controls__btn--big">home + 1</button>
       <button @click="setScore({i: 1, val: score[1] + 1})" class="Controls__btn Controls__btn--big">away + 1</button>
@@ -11,6 +11,13 @@
         <label><input type="number" v-model="localScore[1]"></label>
         <button class="Controls__btn Controls__btn--big">SET</button>
       </div>
+
+      <hr>
+
+      <label>
+        <input type="checkbox" v-model="showEvents" :disabled="mode !== 'scoreboard'">
+        show events
+      </label>
     </div>
     <div class="Controls__tab">
       <h5>Time</h5>
@@ -33,7 +40,7 @@
       </div>
     </div>
     <div class="Controls__tab">
-      <h5>State</h5>
+      <h5>Mode</h5>
       <div>
         <template v-for="s_ in modes">
           <button
@@ -47,7 +54,7 @@
       </div>
     </div>
     <div class="Controls__tab">
-      <h5>Match</h5>
+      <h5>{{ matchData.homeTeamName }} vs. {{ matchData.guestTeamName }}</h5>
 
       <div>
         <label>
@@ -58,7 +65,6 @@
         >SET
         </button>
         <hr>
-        {{ matchData.homeTeamName }} vs. {{ matchData.guestTeamName }}
       </div>
     </div>
   </div>
@@ -66,6 +72,7 @@
 
 <script>
 import {mapMutations, mapState, mapActions} from "vuex";
+import {mapFields} from "vuex-map-fields";
 
 export default {
   name: "Controls",
@@ -79,7 +86,7 @@ export default {
         'homeRoster',
         'guestRoster',
         'scoreboard',
-          'EMPTY'
+        'EMPTY'
       ],
     }
   },
@@ -89,6 +96,7 @@ export default {
   },
   computed: {
     ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode', 'matchData']),
+    ...mapFields(['showEvents']),
     localTime: {
       set(val) {
         this.innerTime = val;

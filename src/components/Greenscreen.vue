@@ -1,7 +1,6 @@
 <template>
   <div class="GreenScreen">
     <transition name="fade" mode="out-in">
-
       <Scoreboard
           v-if="mode === 'scoreboard'"
           key="scoreboard"

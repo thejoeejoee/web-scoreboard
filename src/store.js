@@ -2,16 +2,23 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import createPersistedState from "vuex-persistedstate";
 import Axios from "axios";
+import { getField, updateField } from 'vuex-map-fields';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        mode: null,
-        score: [0, 0],
+        score: [0, 0], // TODO: remove?
+
+        // time management
         time: 0,
         timeIsRunning: false,
 
+        // graphics & controls stuff
+        mode: null,
+        showEvents: true,
+
+        // match
         matchUrl: null,
         matchData: {},
         baseApiUrl: 'https://is.handball.cz',
@@ -23,7 +30,7 @@ export default new Vuex.Store({
             if (url = prompt("Match url: ", state.matchUrl)) {
                 commit('setMatchUrl', url)
 
-                return Axios.post('/api/data-proxy', {url: url}).then((response) => {
+                return Axios.post('/api/api-proxy', {url: url}).then((response) => {
                     if (response.status === 200) {
                         commit('setMatchData', response.data.data)
                     }
@@ -31,7 +38,9 @@ export default new Vuex.Store({
             }
         }
     },
+    getters: {getField},
     mutations: {
+        updateField,
         setTime(state, value) {
             state.time = Math.max(value, 0);
         },

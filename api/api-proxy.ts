@@ -1,6 +1,6 @@
 // @ts-ignore
 import {NowRequest, NowResponse} from '@vercel/node'
-import Axios from "axios";
+import Request from "request";
 
 export default async (request: NowRequest, response: NowResponse) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
@@ -8,12 +8,11 @@ export default async (request: NowRequest, response: NowResponse) => {
     let url = request.body.url;
 
     if (!url) {
-        response.status(400).send();
+        response.status(400).send(null);
         return;
     }
 
     // TODO: check origin of target URL
-    let data = (await Axios.get(url)).data;
 
-    response.status(200).send(JSON.stringify(data))
+    Request.get(url).pipe(response)
 }
