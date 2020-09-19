@@ -1,20 +1,34 @@
 <template>
   <div class="GreenScreen">
     <transition name="fade" mode="out-in">
-      <Scoreboard v-if="mode === 'scoreboard'"></Scoreboard>
+
+      <Scoreboard
+          v-if="mode === 'scoreboard'"
+          key="scoreboard"
+      ></Scoreboard>
 
       <Roster
           v-if="mode === 'homeRoster'" key="homeRoster"
           :name="matchData.homeTeamName" :players="matchData.homeTeamPlayers"
           :leader-name="matchData.homeTeamLeaderName" :coach-name="matchData.homeTeamCoachName"
       ></Roster>
+
       <Roster
           v-if="mode === 'guestRoster'" key="guestRoster"
           :name="matchData.guestTeamName" :players="matchData.guestTeamPlayers"
           :leader-name="matchData.guestTeamLeaderName" :coach-name="matchData.guestTeamCoachName"
       ></Roster>
 
-      <Cover v-if="mode === 'cover'"></Cover>
+      <Cover
+          v-if="mode === 'cover'"
+          key="cover"
+      ></Cover>
+
+      <Overview
+          v-if="mode === 'overview'"
+          key="overview"
+      ></Overview>
+
     </transition>
   </div>
 </template>
@@ -24,10 +38,11 @@ import Scoreboard from "@/components/Scoreboard";
 import {mapState} from "vuex";
 import Roster from "@/components/Roster";
 import Cover from "@/components/Cover";
+import Overview from "@/components/Overview";
 
 export default {
   name: "GreenScreen",
-  components: {Cover, Roster, Scoreboard},
+  components: {Overview, Cover, Roster, Scoreboard},
   computed: {
     ...mapState(['mode', 'matchData']),
   }

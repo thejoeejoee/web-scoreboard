@@ -14,6 +14,7 @@ export default new Vuex.Store({
 
         matchUrl: null,
         matchData: {},
+        baseApiUrl: 'https://is.handball.cz',
     },
     actions: {
         askForMatchUrl({state, commit}) {
@@ -24,7 +25,6 @@ export default new Vuex.Store({
 
                 return Axios.post('/api/data-proxy', {url: url}).then((response) => {
                     if (response.status === 200) {
-                        console.log(response.data);
                         commit('setMatchData', response.data.data)
                     }
                 })
