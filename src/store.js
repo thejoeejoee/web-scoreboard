@@ -3,6 +3,7 @@ import Vue from 'vue'
 import createPersistedState from "vuex-persistedstate";
 import Axios from "axios";
 import { getField, updateField } from 'vuex-map-fields';
+import _ from 'lodash'
 
 Vue.use(Vuex);
 
@@ -38,7 +39,14 @@ export default new Vuex.Store({
             }
         }
     },
-    getters: {getField},
+    getters: {
+        getField,
+        lastEvent: (state) => {
+            if (!state.matchData.events.length) return null;
+
+            return _.last(_.sortBy(state.matchData.events, 'matchTime'))
+        }
+    },
     mutations: {
         updateField,
         setTime(state, value) {

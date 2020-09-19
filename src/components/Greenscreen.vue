@@ -27,7 +27,10 @@
           v-if="mode === 'overview'"
           key="overview"
       ></Overview>
+    </transition>
 
+    <transition name="fade" mode="out-in">
+      <Event v-if="showEvents && mode === 'scoreboard'"></Event>
     </transition>
   </div>
 </template>
@@ -38,12 +41,13 @@ import {mapState} from "vuex";
 import Roster from "@/components/Roster";
 import Cover from "@/components/Cover";
 import Overview from "@/components/Overview";
+import Event from "@/components/Event";
 
 export default {
   name: "GreenScreen",
-  components: {Overview, Cover, Roster, Scoreboard},
+  components: {Event, Overview, Cover, Roster, Scoreboard},
   computed: {
-    ...mapState(['mode', 'matchData']),
+    ...mapState(['mode', 'matchData', 'showEvents']),
   }
 }
 </script>
