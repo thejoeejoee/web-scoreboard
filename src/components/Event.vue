@@ -3,10 +3,15 @@
 
     <div class="Event">
       <div class="Event__number">
-        <span class="Event__number--hash">#</span>{{ event.playerNumber }}
+
+        <template v-if="hasPlayer">
+          <span class="Event__number--hash">#</span>{{ event.playerNumber }}
+        </template>
+
       </div>
       <div class="Event__title">
-        {{ event.playerName }}
+        <span>{{ eventTitle }}</span>
+
         <span class="Event__title--info" v-if="eventInfo">
           {{ eventInfo }}
         </span>
@@ -19,14 +24,15 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapGetters, mapState} from "vuex";
 import {MATCH_EVENT_TYPE} from "@/const.ts";
 
 export default {
   name: "Event",
   computed: {
+    ...mapState(['matchData']),
     ...mapGetters({
-      'event': 'lastEvent'
+      'event': 'lastEvent',
     }),
     eventInfo() {
       return {
@@ -40,6 +46,17 @@ export default {
         [MATCH_EVENT_TYPE.BLUE_CARD]: `🟦️ modrá karta`,
         [MATCH_EVENT_TYPE.TEAM_TIME_OUT]: `⏲️ team time-out`,
       }[this.event.competitionMatchEventTypeId]
+    },
+    hasPlayer() {
+      return !!this.event.playerNumber
+    },
+    eventTitle() {
+      if (this.hasPlayer) return this.event.playerName;
+
+      return {
+        [this.matchData.homeCompetitionTeamId]: this.matchData.homeTeamName,
+        [this.matchData.guestCompetitionTeamId]: this.matchData.guestTeamName,
+      }[this.event.competitionTeamId]|| '';
     }
   }
 }
@@ -87,7 +104,7 @@ homeTeamScore	22
   &__title {
     font-size: 2.25rem;
     height: 4rem;
-    width: 40rem;
+    min-width: 40rem;
     color: white;
     background-color: $blue--dark;
     font-weight: 500;
@@ -98,6 +115,7 @@ homeTeamScore	22
 
     &--info {
       font-size: 1.8rem;
+      margin-left: 1rem;
     }
   }
 

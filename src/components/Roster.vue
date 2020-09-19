@@ -6,8 +6,15 @@
         <span class="Roster__number">{{ p.number }}</span> {{ p.personName }}
       </div>
       <!-- TODO: tune styling -->
-      <div v-if="coachName" class="Roster__player">trenér: {{ coachName }}</div>
-      <div v-if="leaderName" class="Roster__player">vedoucí: {{ leaderName }}</div>
+
+      <div v-if="coachName" class="Roster__player">
+        <span class="Roster__number">OV</span>
+        {{ coachName }}
+      </div>
+      <div v-if="leaderName" class="Roster__player">
+        <span class="Roster__number">T</span>
+        {{ leaderName }}
+      </div>
     </div>
   </div>
 </template>
