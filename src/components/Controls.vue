@@ -115,11 +115,6 @@ export default {
       }
     }
   },
-  watch: {
-    score(new_) {
-      this.localScore = new_;
-    }
-  },
   created() {
     this.stopDataTimer();
   }
