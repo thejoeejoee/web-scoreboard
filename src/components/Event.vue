@@ -104,7 +104,7 @@ homeTeamScore	22
   &__title {
     font-size: 2.25rem;
     height: 4rem;
-    min-width: 40rem;
+    min-width: 45rem;
     color: white;
     background-color: $blue--dark;
     font-weight: 500;

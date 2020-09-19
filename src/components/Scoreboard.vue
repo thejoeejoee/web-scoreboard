@@ -72,7 +72,7 @@ export default {
   margin: 2rem 0 0 2rem;
 
   &__logo {
-    max-width: 6em;
+    max-width: 8rem;
     z-index: 10;
 
     img {
@@ -92,15 +92,15 @@ export default {
       left: 100%;
       height: 100%;
       top: 0;
-      width: 1rem;
+      width: 2rem;
       clip-path: polygon(0 0, 0 0, 100% 100%, 0 100%);
     }
 
     &--first {
       background-color: white;
       color: $blue--dark;
-      padding: .4rem;
       position: relative;
+      height: 4rem;
 
       &.Scoreboard__line--fill-left:before {
         background-color: white;
@@ -114,8 +114,8 @@ export default {
     &--second {
       background-color: $blue--dark;
       color: white;
-      height: 2rem;
       padding: 0 .5rem;
+      height: 2.5rem;
       width: 60%;
 
       &.Scoreboard__line--fill-left:before {
@@ -134,37 +134,35 @@ export default {
       height: 100%;
       right: 100%;
       top: 0;
-      width: 3.75rem;
+      width: 5rem;
       position: absolute;
     }
   }
 
   &__team {
-    font-size: 1.5em;
+    font-size: 2rem;
     padding: 0 0.6rem;
     font-weight: 500;
     text-transform: uppercase;
   }
 
   &__score {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: bold;
-    width: 5rem;
+    width: 8rem;
     text-align: center;
   }
 
   &__time {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: white;
-    padding-left: 0.6rem;
     display: inline-block;
     background-color: $blue--dark;
   }
 
   &__match-part {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: white;
-    padding: 0 0.4rem;
     letter-spacing: 0.1rem;
     display: inline-block;
     background-color: $blue--dark;
