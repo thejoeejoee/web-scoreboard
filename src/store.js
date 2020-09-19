@@ -26,6 +26,10 @@ export default new Vuex.Store({
 
         // timer ID for fetching data
         dataTimerId: null,
+
+        // custom teams data
+        homeTeamShort: '',
+        guestTeamShort: '',
     },
     actions: {
         askForMatchUrl({state, commit, dispatch}) {

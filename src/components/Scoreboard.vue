@@ -7,11 +7,11 @@
     <div class="Scoreboard__data">
 
       <div class="Scoreboard__line Scoreboard__line--first Scoreboard__line--fill-left">
-        <div class="Scoreboard__team">LIT</div>
+        <div class="Scoreboard__team">{{ homeTeamShort || 'AAA' }}</div>
         <div class="Scoreboard__score">
           {{ score[0] }} - {{ score[1] }}
         </div>
-        <div class="Scoreboard__team">DUK</div>
+        <div class="Scoreboard__team">{{ guestTeamShort || 'BBB' }}</div>
       </div>
 
       <div class="Scoreboard__line Scoreboard__line--second Scoreboard__line--fill-left">
@@ -36,7 +36,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['time', 'score', 'timeIsRunning']),
+    ...mapState(['time', 'score', 'timeIsRunning', 'homeTeamShort', 'guestTeamShort']),
 
     timeFormatted() {
       return `${("0" + ((this.time / 60) | 0)).slice(-2)}:${("0" + (this.time % 60)).slice(-2)}`;
@@ -143,6 +143,7 @@ export default {
     font-size: 1.5em;
     padding: 0 0.6rem;
     font-weight: 500;
+    text-transform: uppercase;
   }
 
   &__score {

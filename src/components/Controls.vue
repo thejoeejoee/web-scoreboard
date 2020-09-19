@@ -44,6 +44,14 @@
         <button class="Controls__btn" @click="setTime(time + 1)">+1</button>
         <button class="Controls__btn" @click="setTime(time + 15)">+15</button>
       </div>
+
+      <h5>Teams</h5>
+      <label>
+        <input type="text" v-model="homeTeamShort" maxlength="3">
+      </label>
+      <label>
+        <input type="text" v-model="guestTeamShort" maxlength="3">
+      </label>
     </div>
     <div class="Controls__tab">
       <h5>Mode</h5>
@@ -105,7 +113,7 @@ export default {
   },
   computed: {
     ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode', 'matchData']),
-    ...mapFields(['showEvents', 'dataTimerId']),
+    ...mapFields(['showEvents', 'dataTimerId', 'homeTeamShort', 'guestTeamShort']),
     localTime: {
       set(val) {
         this.innerTime = val;

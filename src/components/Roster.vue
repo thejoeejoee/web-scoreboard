@@ -79,7 +79,7 @@ blueCards	0
 @import "src/styles/variables";
 
 .Roster {
-  width: 60rem;
+  width: 70rem;
 
   &__container {
     position: absolute;
@@ -91,7 +91,6 @@ blueCards	0
     align-items: flex-start;
     padding-top: 10rem;
   }
-
 
   &__title {
     background-color: $blue--dark;
