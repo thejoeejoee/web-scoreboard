@@ -34,6 +34,7 @@
         <button class="Controls__btn" @click="setTime(time - 1)">-1</button>
         <button class="Controls__btn" @click="setTime(time + 1)">+1</button>
         <button class="Controls__btn" @click="setTime(time + 15)">+15</button>
+        <input type="text" v-model="matchPart">
       </div>
 
       <h5>Teams</h5>
@@ -102,7 +103,7 @@ export default {
   },
   computed: {
     ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode', 'matchData']),
-    ...mapFields(['showEvents', 'dataTimerId', 'homeTeamShort', 'guestTeamShort']),
+    ...mapFields(['showEvents', 'dataTimerId', 'homeTeamShort', 'guestTeamShort', 'matchPart']),
     timeFormatted() {
       return `${("0" + ((this.time / 60) | 0)).slice(-2)}:${("0" + (this.time % 60)).slice(-2)}`;
     }

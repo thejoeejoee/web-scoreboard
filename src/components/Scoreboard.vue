@@ -16,7 +16,7 @@
 
       <div class="Scoreboard__line Scoreboard__line--second Scoreboard__line--fill-left">
         <div class="Scoreboard__time">{{ timeFormatted }}</div>
-        <div class="Scoreboard__match-part">1/2</div>
+        <div class="Scoreboard__match-part">{{ matchPart }}</div>
       </div>
 
     </div>
@@ -36,7 +36,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['time', 'score', 'timeIsRunning', 'homeTeamShort', 'guestTeamShort']),
+    ...mapState(['time', 'score', 'timeIsRunning', 'homeTeamShort', 'guestTeamShort', 'matchPart']),
 
     timeFormatted() {
       return `${("0" + ((this.time / 60) | 0)).slice(-2)}:${("0" + (this.time % 60)).slice(-2)}`;

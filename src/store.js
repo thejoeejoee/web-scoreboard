@@ -14,6 +14,7 @@ export default new Vuex.Store({
         // time management
         time: 0,
         timeIsRunning: false,
+        matchPart: '1/2',
 
         // graphics & controls stuff
         mode: null,
