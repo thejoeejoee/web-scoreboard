@@ -38,10 +38,10 @@
 
       <h5>Teams</h5>
       <label>
-        <input type="text" v-model="homeTeamShort" maxlength="3">
+        <input type="text" v-model="homeTeamShort" maxlength="5">
       </label>
       <label>
-        <input type="text" v-model="guestTeamShort" maxlength="3">
+        <input type="text" v-model="guestTeamShort" maxlength="5">
       </label>
     </div>
     <div class="Controls__tab">
