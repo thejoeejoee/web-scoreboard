@@ -17,8 +17,7 @@
       <div class="Overview__subtitle">
         {{ matchData.competitionName }}
         <br>
-        <!-- TODO: fix TZ -->
-        {{ new Date(matchData.matchStart).toLocaleString() }}
+        {{ localeDateTime }}
         –
         {{  matchData.sportFieldName }}
       </div>
@@ -34,7 +33,10 @@ export default {
   name: "Overview",
   computed: {
     ...mapState(['matchData', 'baseApiUrl']),
-  }
+    localeDateTime() {
+      return new Date(this.matchData.matchStart.replace(/Z$/, '')).toLocaleString()
+    }
+  },
 }
 </script>
 
