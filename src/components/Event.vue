@@ -29,11 +29,14 @@ import {MATCH_EVENT_TYPE} from "@/const.ts";
 
 export default {
   name: "Event",
+  data() {
+    return {
+      event: null
+    }
+  },
   computed: {
     ...mapState(['matchData']),
-    ...mapGetters({
-      'event': 'lastEvent',
-    }),
+    ...mapGetters(['lastEvent']),
     eventInfo() {
       return {
         [MATCH_EVENT_TYPE.GOAL]: `${this.event.homeTeamScore} - ${this.event.guestTeamScore}`,
@@ -56,8 +59,17 @@ export default {
       return {
         [this.matchData.homeCompetitionTeamId]: this.matchData.homeTeamName,
         [this.matchData.guestCompetitionTeamId]: this.matchData.guestTeamName,
-      }[this.event.competitionTeamId]|| '';
-    }
+      }[this.event.competitionTeamId] || '';
+    },
+  },
+  created() {
+    this.$watch(
+        'lastEvent',
+        (new_, old) => {
+          this.event = new_;
+        },
+        {immediate: true}
+    )
   }
 }
 /*

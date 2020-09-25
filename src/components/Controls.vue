@@ -86,8 +86,6 @@ export default {
   name: "Controls",
   data() {
     return {
-      localScore: [0, 0],
-      innerTime: 0,
       modes: [
         'cover',
         'overview',

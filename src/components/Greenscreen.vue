@@ -63,12 +63,4 @@ export default {
   box-sizing: content-box;
   position: relative;
 }
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .8s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
 </style>
