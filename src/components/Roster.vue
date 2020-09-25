@@ -22,14 +22,13 @@
         </span>
         </div>
         <!-- TODO: tune styling -->
-
         <div v-if="coachName" class="Roster__player">
           <span class="Roster__number">OV</span>
-          {{ coachName }}
+          {{ leaderName }}
         </div>
         <div v-if="leaderName" class="Roster__player">
           <span class="Roster__number">T</span>
-          {{ leaderName }}
+          {{ coachName }}
         </div>
       </div>
     </div>
