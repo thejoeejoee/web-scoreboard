@@ -51,7 +51,7 @@
           <button
               @click="setMode(s_)"
               :key="s_" :disabled="s_ === mode"
-              class="Controls__btn Controls__btn--mid Controls__btn--block"
+              class="Controls__btn Controls__btn--mid"
           >{{ s_ }}
           </button>
         </template>
