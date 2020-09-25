@@ -8,23 +8,12 @@
       <button @click="startDataTimer" v-if="!dataTimerId">START DATA TIMER</button>
       <button @click="stopDataTimer" v-if="dataTimerId">STOP DATA TIMER</button>
       <br>
-      <!--
-            <button @click="setScore({i: 0, val: score[0] + 1})" class="Controls__btn Controls__btn&#45;&#45;big">home + 1</button>
-            <button @click="setScore({i: 1, val: score[1] + 1})" class="Controls__btn Controls__btn&#45;&#45;big">away + 1</button>
-
-            <div>
-              <label><input type="number" v-model="localScore[0]"></label>
-              <label><input type="number" v-model="localScore[1]"></label>
-              <button class="Controls__btn Controls__btn&#45;&#45;big">SET</button>
-            </div>
-
-            <hr>-->
-
       <label>
         <input type="checkbox" v-model="showEvents" :disabled="mode !== 'scoreboard'">
         show events
       </label>
     </div>
+
     <div class="Controls__tab">
       <h5>Time</h5>
 
@@ -37,6 +26,8 @@
                 @click="setTimeIsRunning(false)"
         >STOP
         </button>
+
+        <button class="Controls__right Controls__btn Controls__btn--big" disabled>{{ timeFormatted }}</button>
         <hr>
 
         <button class="Controls__btn" @click="setTime(time - 15)">-15</button>
@@ -114,13 +105,8 @@ export default {
   computed: {
     ...mapState(['score', 'timeIsRunning', 'time', 'matchUrl', 'mode', 'matchData']),
     ...mapFields(['showEvents', 'dataTimerId', 'homeTeamShort', 'guestTeamShort']),
-    localTime: {
-      set(val) {
-        this.innerTime = val;
-      },
-      get() {
-        return this.innerTime;
-      }
+    timeFormatted() {
+      return `${("0" + ((this.time / 60) | 0)).slice(-2)}:${("0" + (this.time % 60)).slice(-2)}`;
     }
   },
   created() {
@@ -133,6 +119,10 @@ export default {
 .Controls {
   display: flex;
   flex-direction: row;
+
+  &__right {
+    float: right;
+  }
 
   &__tab {
     border-right: 2px solid black;

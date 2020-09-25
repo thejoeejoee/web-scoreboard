@@ -1,33 +1,34 @@
 <template>
   <div class="GreenScreen">
     <transition name="fade">
+      <keep-alive>
+        <Scoreboard
+            v-if="mode === 'scoreboard'"
+            key="scoreboard"
+        ></Scoreboard>
 
-      <Scoreboard
-          v-if="mode === 'scoreboard'"
-          key="scoreboard"
-      ></Scoreboard>
+        <Roster
+            v-if="mode === 'homeRoster'" key="homeRoster"
+            :name="matchData.homeTeamName" :players="matchData.homeTeamPlayers"
+            :leader-name="matchData.homeTeamLeaderName" :coach-name="matchData.homeTeamCoachName"
+        ></Roster>
 
-      <Roster
-          v-if="mode === 'homeRoster'" key="homeRoster"
-          :name="matchData.homeTeamName" :players="matchData.homeTeamPlayers"
-          :leader-name="matchData.homeTeamLeaderName" :coach-name="matchData.homeTeamCoachName"
-      ></Roster>
+        <Roster
+            v-if="mode === 'guestRoster'" key="guestRoster"
+            :name="matchData.guestTeamName" :players="matchData.guestTeamPlayers"
+            :leader-name="matchData.guestTeamLeaderName" :coach-name="matchData.guestTeamCoachName"
+        ></Roster>
 
-      <Roster
-          v-if="mode === 'guestRoster'" key="guestRoster"
-          :name="matchData.guestTeamName" :players="matchData.guestTeamPlayers"
-          :leader-name="matchData.guestTeamLeaderName" :coach-name="matchData.guestTeamCoachName"
-      ></Roster>
+        <Cover
+            v-if="mode === 'cover'"
+            key="cover"
+        ></Cover>
 
-      <Cover
-          v-if="mode === 'cover'"
-          key="cover"
-      ></Cover>
-
-      <Overview
-          v-if="mode === 'overview'"
-          key="overview"
-      ></Overview>
+        <Overview
+            v-if="mode === 'overview'"
+            key="overview"
+        ></Overview>
+      </keep-alive>
     </transition>
 
     <transition name="fade" mode="out-in">
