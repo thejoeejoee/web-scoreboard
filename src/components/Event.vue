@@ -1,25 +1,27 @@
 <template>
   <div class="Event__container">
 
-    <div class="Event">
-      <div class="Event__number">
+    <transition name="fade">
+      <div class="Event" v-if="event && show">
+        <div class="Event__number">
 
-        <template v-if="hasPlayer">
-          <span class="Event__number--hash">#</span>{{ event.playerNumber }}
-        </template>
+          <template v-if="hasPlayer">
+            <span class="Event__number--hash">#</span>{{ event.playerNumber }}
+          </template>
 
-      </div>
-      <div class="Event__title">
-        <span>{{ eventTitle }}</span>
+        </div>
+        <div class="Event__title">
+          <span>{{ eventTitle }}</span>
 
-        <span class="Event__title--info" v-if="eventInfo">
+          <span class="Event__title--info" v-if="eventInfo">
           {{ eventInfo }}
         </span>
+        </div>
+        <div class="Event__time">{{ event.matchTime.replace(/^00:/, '') }}</div>
+
       </div>
-      <div class="Event__time">{{ event.matchTime.replace(/^00:/, '') }}</div>
 
-    </div>
-
+    </transition>
   </div>
 </template>
 
@@ -31,7 +33,8 @@ export default {
   name: "Event",
   data() {
     return {
-      event: null
+      event: null,
+      show: false,
     }
   },
   computed: {
@@ -66,9 +69,16 @@ export default {
     this.$watch(
         'lastEvent',
         (new_, old) => {
+          if ((new_ && this.event && new_.id !== this.event.id)) this.show = true;
+
+          if (this.show) {
+            setTimeout(() => {
+              this.show = false;
+            }, 5000);
+          }
+
           this.event = new_;
         },
-        {immediate: true}
     )
   }
 }
