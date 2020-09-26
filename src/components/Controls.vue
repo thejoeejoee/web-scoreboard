@@ -56,6 +56,12 @@
           >{{ s_ }}
           </button>
         </template>
+        <br>
+        <hr>
+        <button class="Controls__btn" @click="setScore({i: 0, val: score[0] - 1})">H-1</button>
+        <button class="Controls__btn Controls__btn--mid" @click="setScore({i: 0, val: score[0] + 1})">H+1</button>
+        <button class="Controls__btn Controls__btn--mid" @click="setScore({i: 1, val: score[1] + 1})">A+1</button>
+        <button class="Controls__btn" @click="setScore({i: 1, val: score[1] - 1})">A-1</button>
 
       </div>
     </div>
