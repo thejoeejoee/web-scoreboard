@@ -44,7 +44,7 @@ export default {
   },
   created() {
     this.timerID = setInterval(() => {
-      if (Math.abs(this.lastTimeTick - new Date()) > 1000 && this.timeIsRunning) {
+      if (Math.abs(this.lastTimeTick - new Date()) >= 1000 && this.timeIsRunning) {
         this.$store.commit(
             'setTime',
             this.time + 1
