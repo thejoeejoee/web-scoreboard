@@ -7,7 +7,7 @@
           <img :src="baseApiUrl + matchData.homeTeamClubPhotoUrl" alt="">
         </div>
         <div class="Overview__team-title Overview__team-title--left">{{ matchData.homeTeamName }}</div>
-        <div class="Overview__score">{{ matchData.homeTeamScore }} - {{ matchData.guestTeamScore }}</div>
+        <div class="Overview__score">{{ score[0] }} - {{ score[1] }}</div>
         <div class="Overview__team-title Overview__team-title--right">{{ matchData.guestTeamName }}</div>
         <div class="Overview__team-logo Overview__team-logo--right">
           <img :src="baseApiUrl + matchData.guestTeamClubPhotoUrl" alt="">
@@ -32,7 +32,7 @@ import {mapState} from "vuex";
 export default {
   name: "Overview",
   computed: {
-    ...mapState(['matchData', 'baseApiUrl']),
+    ...mapState(['matchData', 'baseApiUrl', 'score']),
     localeDateTime() {
       return new Date(this.matchData.matchStart.replace(/Z$/, '')).toLocaleString()
     }
