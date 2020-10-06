@@ -1,6 +1,6 @@
 <template>
   <div class="Roster__container">
-    <div class="Roster">
+    <div class="Roster" :style="{left: `${offset}rem`}">
       <div class="Roster__title">{{ name }}</div>
       <div class="Roster__content">
         <div class="Roster__player" v-for="p in sortedPlayers" :key="p.id">
@@ -21,6 +21,7 @@
 
         </span>
         </div>
+        <span>&nbsp;</span>
         <!-- TODO: tune styling -->
         <div v-if="leaderName" class="Roster__player">
           <span class="Roster__number">OV</span>
@@ -44,6 +45,7 @@ export default {
   props: {
     name: {type: String},
     players: {type: Array},
+    offset: {type: Number, default: 0, required: false},
 
     leaderName: {type: String, default: null},
     coachName: {type: String, default: null},
@@ -78,7 +80,8 @@ blueCards	0
 @import "src/styles/variables";
 
 .Roster {
-  width: 70rem;
+  width: 40rem;
+  position: relative;
 
   &__container {
     position: absolute;
@@ -88,7 +91,7 @@ blueCards	0
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 10rem;
+    padding-top: 7.5rem;
   }
 
   &__title {
@@ -123,7 +126,7 @@ blueCards	0
     background-color: white;
     padding: 1.5rem;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   &__player {

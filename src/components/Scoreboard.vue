@@ -69,7 +69,7 @@ export default {
   position: relative;
   align-items: flex-start;
 
-  margin: 2rem 0 0 2rem;
+  margin: 3rem 0 0 3rem;
 
   &__logo {
     max-width: 8rem;

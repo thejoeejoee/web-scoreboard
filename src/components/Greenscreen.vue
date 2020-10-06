@@ -11,12 +11,14 @@
             v-if="mode === 'homeRoster'" key="homeRoster"
             :name="matchData.homeTeamName" :players="matchData.homeTeamPlayers"
             :leader-name="matchData.homeTeamLeaderName" :coach-name="matchData.homeTeamCoachName"
+            :offset="-30"
         ></Roster>
 
         <Roster
             v-if="mode === 'guestRoster'" key="guestRoster"
             :name="matchData.guestTeamName" :players="matchData.guestTeamPlayers"
             :leader-name="matchData.guestTeamLeaderName" :coach-name="matchData.guestTeamCoachName"
+            :offset="30"
         ></Roster>
 
         <Cover
