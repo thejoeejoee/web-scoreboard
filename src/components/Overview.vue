@@ -85,6 +85,7 @@ export default {
     height: 2.25em;
     font-weight: 600;
     font-size: 2.5em;
+    line-height: .95;
     padding: 0 .5em;
     background-color: $blue--dark;
     color: white;
